@@ -1,4 +1,5 @@
 package Pages;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import Ayuda.PagePrincipal;
-import Ayuda.Utilitarios;
-
 
 public class Contacto extends PagePrincipal {
 
@@ -21,25 +20,23 @@ public class Contacto extends PagePrincipal {
 		private final By seleccionservicio;
 		private final By ingresarconsulta;
 		private final By clicenviar;
-		private final By envioCorrecto;
+		private final By mensaje;
 
 		
 		//Constructores
 		
 		public Contacto(WebDriver driver, int seconds) {
 			super(driver, seconds);
-		
-		
 			this.menuContacto = By.xpath("//header/div[1]/div[2]/div[1]/nav[1]/ul[1]/li[5]/a[1]");
-			this.ingresarnombre = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[1]/input[1]");
-			this.ingresaremail = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[2]/input[1]");
-			this.ingresartelefono = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[3]/input[1]");
-			this.ingresarempresa = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[4]/input[1]");
-			this.ingresarcargo = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[5]/input[1]");
+			this.ingresarnombre = By.xpath("//input[@placeholder = 'Ingrese Nombre Completo']");
+			this.ingresaremail = By.xpath("//input[@placeholder = 'Ingrese Email']");
+			this.ingresartelefono = By.xpath("//input[@placeholder = 'Ingrese Telefono']");
+			this.ingresarempresa = By.xpath("//input[@placeholder = 'Ingrese Empresa']");
+			this.ingresarcargo = By.xpath("//input[@placeholder = 'Ingrese Cargo']");
 			this.seleccionservicio = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[6]/div[1]/select[1]");
-			this.ingresarconsulta = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/span[7]/textarea[1]");
+			this.ingresarconsulta = By.tagName("textarea");
 			this.clicenviar = By.xpath("//body/div[@id='wrapper']/main[@id='main']/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/p[1]/input[1]");
-			
+			this.mensaje = By.xpath("//div[@role= 'alert'][contains(@class,'response-output')]");
 		}
 		
 		
@@ -54,27 +51,27 @@ public class Contacto extends PagePrincipal {
 		}
 		
 		public void nombre(String ingresenombrecompleto) {
-			driver.findElement(ingresarnombre).sendKeys(ingresenombrecompleto);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarnombre))).sendKeys(ingresenombrecompleto);
 			
 		}
 		
 		public void email(String ingreseemail) {
-			driver.findElement(ingresaremail).sendKeys(ingreseemail);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresaremail))).sendKeys(ingreseemail);
 			
 		}
 		
 		public void telefono(String ingresetelefono) {
-			driver.findElement(ingresartelefono).sendKeys(ingresetelefono);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresartelefono))).sendKeys(ingresetelefono);
 			
 		}
 		
 		public void empresa(String ingresenombreempresa) {
-			driver.findElement(ingresarempresa).sendKeys(ingresenombreempresa);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarempresa))).sendKeys(ingresenombreempresa);
 			
 		}
 		
 		public void cargo(String ingresecargo) {
-			driver.findElement(ingresarcargo).sendKeys(ingresecargo);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarcargo))).sendKeys(ingresecargo);
 			
 		}
 		
@@ -86,7 +83,7 @@ public class Contacto extends PagePrincipal {
 		}
 		
 		public void consulta(String ingreseconsulta) {
-			driver.findElement(ingresarconsulta).sendKeys(ingreseconsulta);
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarconsulta))).sendKeys(ingreseconsulta);
 			
 		}
 		
@@ -95,14 +92,32 @@ public class Contacto extends PagePrincipal {
 			
 		}
 		
-		public String contactoEnviado(){
-			String envioFormulario;
-			WebElement Elemento;
-			Elemento = driver.findElement(clicenviar);
-			Scroll.downScrollBarUntilElement(driver, Elemento);		
-			envioFormulario= wait.until(ExpectedConditions.visibilityOf(driver.findElement(envioCorrecto))).getText();			
-			return envioFormulario;
-			
-		}
-	
+		public String contactoEnviado() {
+	        String envioFormulario;
+	        WebElement Elemento;
+	        Elemento = driver.findElement(clicenviar);
+	        Scroll.downScrollBarUntilElement(driver, Elemento);
+	        if (!isExistsObject(driver, mensaje, 10))
+	            return null;
+	        envioFormulario = wait.until(ExpectedConditions.visibilityOf(driver.findElement(mensaje))).getText();
+	        System.out.println(envioFormulario);
+	        return envioFormulario;
+	    }
+
+	    public static boolean isExistsObject(WebDriver driver, By envioCorrecto, int seg) {
+	        try {
+	            List<WebElement> element;
+	            int i = 0;
+	            do {
+	                element = driver.findElements(envioCorrecto);
+	                i++;
+	                System.out.println(element.size());
+	            } while (element.size() == 0 && i < seg);
+	            if (element.size() > 0)
+	                return true;
+	            return false;
+	        } catch (Exception e) {
+	            return false;
+	        }
+	    }
 }

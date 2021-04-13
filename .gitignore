@@ -17,6 +17,3 @@ RemoteSystemsTempFiles
 # otros
 *.log
 *.lck
-
-# VS Code
-.vscode/

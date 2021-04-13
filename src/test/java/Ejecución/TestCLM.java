@@ -11,8 +11,6 @@ import Pages.Empresa;
 import Pages.Recursos;
 import Pages.Servicios;
 
-
-
 public class TestCLM{
 	private WebDriver driver;
 

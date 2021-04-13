@@ -43,53 +43,41 @@ public class Contacto extends PagePrincipal {
 		// Metodos
 		
 		public void clicMenuContacto() {
-			
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(menuContacto))).click();
 			driver.findElement(menuContacto).click();
-
-			
 		}
 		
 		public void nombre(String ingresenombrecompleto) {
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarnombre))).sendKeys(ingresenombrecompleto);
-			
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarnombre))).sendKeys(ingresenombrecompleto);	
 		}
 		
 		public void email(String ingreseemail) {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresaremail))).sendKeys(ingreseemail);
-			
 		}
 		
 		public void telefono(String ingresetelefono) {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresartelefono))).sendKeys(ingresetelefono);
-			
 		}
 		
 		public void empresa(String ingresenombreempresa) {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarempresa))).sendKeys(ingresenombreempresa);
-			
 		}
 		
 		public void cargo(String ingresecargo) {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarcargo))).sendKeys(ingresecargo);
-			
 		}
 		
 		public void seleccioneservicio(String servicio) {
 			Select seleccionarServicio = new Select(driver.findElement(seleccionservicio));
-			seleccionarServicio.selectByVisibleText(servicio);
-		
-			
+			seleccionarServicio.selectByVisibleText(servicio);	
 		}
 		
 		public void consulta(String ingreseconsulta) {
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarconsulta))).sendKeys(ingreseconsulta);
-			
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(ingresarconsulta))).sendKeys(ingreseconsulta);	
 		}
 		
 		public void presioneBotonEnviar() {
 			driver.findElement(clicenviar).click();
-			
 		}
 		
 		public String contactoEnviado() {
